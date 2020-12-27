@@ -1,9 +1,17 @@
-import re
 import os
+import re
 
-if (os.path.exists("./decrypted") != True):
-    os.makedirs("decrypted")
 
+
+def initFileModule():
+    if not os.path.exists("./Decrypted"):
+        os.makedirs("Decrypted")
+    if not os.path.exists("./Encrypted"):
+        os.makedirs("Encrypted")
+    if not os.path.exists("./Encrypt"):
+        os.makedirs("Encrypt")
+    if not os.path.exists("./Decrypt"):
+        os.makedirs("Decrypt")
 
 def checkIfFilenameTypeIsText(filename):
     fileSplit = filename.split(".")
@@ -20,9 +28,9 @@ def checkIfFilenameTypeIsText(filename):
     return filename
 
 
-def listAllTextFiles():
+def listAllTextFiles(pathOfDir="./"):
     files = []
-    for f in os.listdir():
+    for f in os.listdir(pathOfDir):
         if os.path.isfile(f):
             print(f)
             if (re.search(r"\.txt$", f)):
@@ -30,23 +38,31 @@ def listAllTextFiles():
     return files
 
 
-def createDecryptedFile(filename="Decrypted.txt", content="This is the default Text for the File",overwrite = False):
+def createTextFile(filename="Decrypted.txt", location="./Decrypted/", content="This is the default Text for the File",
+                   overwrite=False):
     filename = checkIfFilenameTypeIsText(filename)
     print(filename)
     if overwrite:
-        if (os.path.exists(f"./decrypted/{filename}")):
+        if os.path.exists(location + filename):
             filenameSlice = filename.split(".")
 
             i = 1
             while True:
                 filename = f"{filenameSlice[0]}{i}.{filenameSlice[1]}"
-                if not os.path.exists(f"./decrypted/{filename}"):
+                if not os.path.exists(location + filename):
                     break
-                i = i+1
+                i = i + 1
 
-    file = open(f'./decrypted/{filename}','w')
+    file = open(location + filename, 'w')
     file.write(content)
     file.close()
 
 
-createDecryptedFile("DennisIstMegacool",content="Welt wie geht es dir denn heute?")
+def createDecryptFile(filename="ThisIsMyFile.txt", content=" ", overwrite=True):
+    createTextFile(filename = filename, location = "./Decrypted/", content = content, overwrite = overwrite)
+
+
+initFileModule()
+
+
+createDecryptFile("DennisIstMegacool", content = "Welt wie geht es dir denn heute?")
