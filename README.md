@@ -13,4 +13,3 @@ Python has therefore for me the clear advantage over C because of the lists, met
 The plan for this project is to first implement the simplest cipher, the Caesar cipher, and break it by algorithm. After that we will implement the Vigenère cipher and try to break it. Next some code cleanup and the filesystem for saving and creating files etc..
 After that I will dig into the library Tkinter to create the graphical user interface and make a quite simple one there. If this all worked out well and didn't lead to any problems yet. I will clean up the code again and implement a third cipher algorithm and try to crack it. The goal is that in the end all are selectable and work when encrypting and breaking a text.
 
-Translated with www.DeepL.com/Translator (free version)
