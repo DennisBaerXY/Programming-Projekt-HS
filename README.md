@@ -11,7 +11,7 @@ use Python for my project. Python also has many build-in methods and libraries t
 and the file system. But even if I can do that I still want to make a graphical user interface that allows to select
 files to encrypt, enter texts and encrypt them with the selected ciphers and then save them as a file in a folder.
 
-**Python** has therefore for me the clear advantage over C because of the lists, methods and the simpler strings. But also
+**Python** has therefore for me the clear advantage **over C** because of the lists, methods and the simpler strings. But also
 the library Tkinter for the graphical interface.
 
 The plan for this project is to first implement the simplest cipher, the Caesar cipher, and break it by algorithm. After
