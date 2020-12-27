@@ -7,7 +7,6 @@ from chiffren import *
 
 
 
-
 alphabet = list(map(chr, range(65, 91)))
 
 print(f"Geben sie nur Zeichen enthalten im Alphabet: {''.join(alphabet)} ein. Sonderzeichen und leertasten werden einfach ignoriert und nicht verschluesselt")
