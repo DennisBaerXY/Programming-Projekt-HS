@@ -33,7 +33,7 @@ def listAllTextFiles():
 def createDecryptedFile(filename="Decrypted.txt", content="This is the default Text for the File"):
     filename = checkIfFilenameTypeIsText(filename)
     print(filename)
-    file = open(filename,'w')
+    file = open(f'./decrypted/{filename}','w')
     file.write(content)
     file.close()
 
