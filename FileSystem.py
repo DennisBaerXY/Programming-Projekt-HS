@@ -30,13 +30,23 @@ def listAllTextFiles():
     return files
 
 
-def createDecryptedFile(filename="Decrypted.txt", content="This is the default Text for the File"):
+def createDecryptedFile(filename="Decrypted.txt", content="This is the default Text for the File",overwrite = False):
     filename = checkIfFilenameTypeIsText(filename)
     print(filename)
+    if overwrite:
+        if (os.path.exists(f"./decrypted/{filename}")):
+            filenameSlice = filename.split(".")
+
+            i = 1
+            while True:
+                filename = f"{filenameSlice[0]}{i}.{filenameSlice[1]}"
+                if not os.path.exists(f"./decrypted/{filename}"):
+                    break
+                i = i+1
+
     file = open(f'./decrypted/{filename}','w')
     file.write(content)
     file.close()
-
 
 
 createDecryptedFile("DennisIstMegacool",content="Welt wie geht es dir denn heute?")
