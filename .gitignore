@@ -2,5 +2,4 @@
 /Encrypt/
 /Decrypt/
 /Encrypted/
-/.idea/
-/_pycache_/
+/__pycache__/
