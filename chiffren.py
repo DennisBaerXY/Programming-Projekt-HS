@@ -1,3 +1,10 @@
+"""
+Dennis Bär
+Programmierprojekt chiffren
+chiffren.py
+"""
+
+
 # Die funktion nimmt einen Text in der variable text und einen shift amount in amount. Amounts default wert ist 10
 def ceasarChiffre(text, amount=10):
     # String wird in liste umgewandelt da das zuweisen an eine stelle im string bsp text[0] nicht funktioniert
@@ -35,7 +42,7 @@ def shiftChar(c, amount=10, asciiLast=90):
 
         return c
 
-    #Returned zeichen wenn es kein Groß buchstabe ist
+    # Returned zeichen wenn es kein Groß buchstabe ist
     return c
 
 
@@ -44,17 +51,19 @@ def vigenereChiffre(text="Default", key="Default"):
 
     alphabet = list(map(chr, range(65, 91)))
 
-    for i in range(len(text)):
+    # Generierung des um eine Zeile immer geschifftete Feld
+    for i in range(26):
         row = []
         for j in range(26):
             row.append(ceasarChiffre(alphabet[j], i))
         multiCeasarChiffre.append(row)
-        print("".join(row))
 
     text = text.upper()
     key = key.upper()
+    # Ursprungs key um das es erweitert werden kann
     keydata = key
 
+    # Solange der text noch länger als der Key ist wird an key, key hinzugefügt ..bsp key: Abc Text: Dennis,  Key danach -> AbcAbc
     while len(text) > len(key):
         key = key + keydata
 
@@ -66,14 +75,19 @@ def vigenereChiffre(text="Default", key="Default"):
     for i in range(len(text)):
         # -65 um die Großbuchstaben in indexe umzuwanden bps A = 65  ->  A - 65 = 0
         # ord um die Ascii werte zu bekommen in Decimal
+
         indexText = ord(textList[i]) - 65
         indexKey = ord(keyList[i]) - 65
 
-        encryptList.append(multiCeasarChiffre[indexText][indexKey])
+        if (indexText <= 25 and indexText >= 0):
 
-    # Zusammen fügen der Liste als Text
-    encryptText = "".join(encryptList)
-    print("ViginerChifre: ", encryptText)
+            encryptList.append(multiCeasarChiffre[indexText][indexKey])
+        else:
+            encryptList.append(text[i])
+
+        # Zusammen fügen der Liste als Text
+        encryptText = "".join(encryptList)
+    return encryptText
 
 
 # vigenereChiffre("Wassr","IchBinDennisBaer")
