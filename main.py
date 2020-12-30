@@ -3,9 +3,8 @@ Dennis Bär
 Programmierprojekt chiffren
 """
 
+#Import der Chiffren aus der anderern Datei
 from chiffren import *
-
-
 
 alphabet = list(map(chr, range(65, 91)))
 

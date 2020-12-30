@@ -3,6 +3,7 @@ import re
 
 
 
+# If Folders Dont exist Create them
 def initFileModule():
     if not os.path.exists("./Decrypted"):
         os.makedirs("Decrypted")
@@ -12,6 +13,7 @@ def initFileModule():
         os.makedirs("Encrypt")
     if not os.path.exists("./Decrypt"):
         os.makedirs("Decrypt")
+
 
 def checkIfFilenameTypeIsText(filename):
     fileSplit = filename.split(".")
@@ -63,6 +65,5 @@ def createDecryptFile(filename="ThisIsMyFile.txt", content=" ", overwrite=True):
 
 
 initFileModule()
-
 
 createDecryptFile("DennisIstMegacool", content = "Welt wie geht es dir denn heute?")

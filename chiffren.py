@@ -35,6 +35,7 @@ def shiftChar(c, amount=10, asciiLast=90):
 
         return c
 
+    #Returned zeichen wenn es kein Groß buchstabe ist
     return c
 
 
@@ -88,7 +89,7 @@ def countChars(text):
         counting.append(0)
     # Ignoriert leertasten und addiert die zahl an der Index stelle des Buchstabens
     for z in text:
-        #Zählt die sonderzeichen nicht mit sondern nur die buchstaben die eingegeben Wurden
+        # Zählt die sonderzeichen nicht mit sondern nur die buchstaben die eingegeben Wurden
         if (ord(z) >= 65 and ord(z) <= 90):
             index = ord(z) - 65
             counting[index] += 1
