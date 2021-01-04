@@ -68,9 +68,7 @@ window.title("Chiffren by Baer")
 frame = tk.Frame(window)
 mainmenu = tk.Menu(frame)
 mainmenu.add_command(label = "Exit", command = window.quit)
-mainmenu.add_command(label = "Options", )
-mainmenu.add_command(label = "Save")
-mainmenu.add_command(label = "Load")
+
 
 window.config(menu = mainmenu)
 
