@@ -26,9 +26,3 @@ print(f"Guessed shifts: {guessedShifts}, guessed Text: {decryptedText}")
 print(f"Vigenere Chiffre encrypted: {vigenereChiffre(myText, key)}")
 
 
-dokuText = 'Dies ist ein verschluesselter Text der sehr cool verschluesselt ist'
-print("\n\n")
-for i in range(26):
-    print(f"{ceasarChiffre(dokuText,i)}")
-
-print(countChars(dokuText))
