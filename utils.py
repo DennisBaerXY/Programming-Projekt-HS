@@ -12,3 +12,5 @@ def random_chiffren_key_generator(keyLength):
 
 def random_shifts():
     return randint(1, 25)
+
+

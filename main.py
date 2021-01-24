@@ -7,9 +7,9 @@ Main.py
 # Import der Chiffren aus der anderern Datei
 from chiffren import *
 
-alphabet = list(map(chr, range(65, 91)))
+#alphabet = list(map(chr, range(65, 91)))
 
-print( f"Geben sie nur Zeichen enthalten im Alphabet: {''.join(alphabet)} ein. Sonderzeichen und leertasten werden einfach ignoriert und nicht verschluesselt")
+#print( f"Geben sie nur Zeichen enthalten im Alphabet: {''.join(alphabet)} ein. Sonderzeichen und leertasten werden einfach ignoriert und nicht verschluesselt")
 
 myText = input("Text der vesrschluesselt werden soll: ")
 shifts = int(input("Wie viele shifts?:"))
@@ -24,3 +24,11 @@ print("Caesar Decrypted: ")
 print(f"Guessed shifts: {guessedShifts}, guessed Text: {decryptedText}")
 
 print(f"Vigenere Chiffre encrypted: {vigenereChiffre(myText, key)}")
+
+
+dokuText = 'Dies ist ein verschluesselter Text der sehr cool verschluesselt ist'
+print("\n\n")
+for i in range(26):
+    print(f"{ceasarChiffre(dokuText,i)}")
+
+print(countChars(dokuText))

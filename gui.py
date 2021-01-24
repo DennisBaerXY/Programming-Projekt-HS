@@ -8,7 +8,7 @@ from utils import *
 def openFile(text_box):
     print(text_box)
     # Returns a file that is open
-    file = filedialog.askopenfile(initialdir = "./", mode = "r", filetypes = [("Text Files", '*.txt')])
+    file = filedialog.askopenfile(initialdir="./", mode="r", filetypes=[("Text Files", '*.txt')])
 
     if file is not None:
         chars = file.read()
@@ -21,7 +21,7 @@ def saveToFile(box):
     content = box.get("1.0", "end")
     if content != None:
         extensions = [('Text Document', '*.txt'), ('All Files', '*.*')]
-        file = filedialog.asksaveasfile(mode = "w", filetypes = extensions, defaultextension = extensions)
+        file = filedialog.asksaveasfile(mode="w", filetypes=extensions, defaultextension=extensions)
         if file is None:
             return
         file.write(content)
@@ -54,7 +54,6 @@ def encryptInputText(InputBox, OutputBox):
         chiffre_text = ceasarChiffre(content, shift_content)
 
     if choice == 1:
-
         chiffre_text = vigenereChiffre(content, key_content)
 
     OutputBox.delete("1.0", "end")
@@ -67,51 +66,50 @@ window.title("Chiffren by Baer")
 
 frame = tk.Frame(window)
 mainmenu = tk.Menu(frame)
-mainmenu.add_command(label = "Exit", command = window.quit)
+mainmenu.add_command(label="Exit", command=window.quit)
 
-
-window.config(menu = mainmenu)
+window.config(menu=mainmenu)
 
 # Header
-Header = tk.Label(text = "Chiffren by Baer", height = 3, font = 10, foreground = 'black')
-Header.grid(row = 0, column = 2)
+Header = tk.Label(text="Chiffren by Baer", height=3, font=10, foreground='black')
+Header.grid(row=0, column=2)
 
 # Left Site
 
-LabelEntry = tk.Label(text = "Input Text", width = 25, height = 1, font = 6)
-LabelEntry.grid(column = 0, row = 1)
+LabelEntry = tk.Label(text="Input Text", width=25, height=1, font=6)
+LabelEntry.grid(column=0, row=1)
 
-LeftBox = tk.Text(height = 3, width = 20)
-LeftBox.grid(column = 0, row = 2)
+LeftBox = tk.Text(height=3, width=20)
+LeftBox.grid(column=0, row=2)
 
-Button = tk.Button(text = "Load from file ", command = lambda: openFile(LeftBox))
-Button.grid(column = 0, row = 3)
+Button = tk.Button(text="Load from file ", command=lambda: openFile(LeftBox))
+Button.grid(column=0, row=3)
 
 optionsFrame = tk.Frame(window)
-optionsFrame.grid(row = 4)
+optionsFrame.grid(row=4)
 
-LabelOptions = tk.Label(optionsFrame, text = "Options", font = 10, height = 2)
+LabelOptions = tk.Label(optionsFrame, text="Options", font=10, height=2)
 LabelOptions.pack()
 
-shiftsLabel = tk.Label(optionsFrame, text = "Shifts:", font = 4)
+shiftsLabel = tk.Label(optionsFrame, text="Shifts:", font=4)
 shiftsLabel.pack()
 
-shiftsEntry = tk.Entry(optionsFrame, text = "12")
+shiftsEntry = tk.Entry(optionsFrame, text="12")
 shiftsEntry.pack()
 
-keyLabel = tk.Label(optionsFrame, text = "Key:", font = 4)
+keyLabel = tk.Label(optionsFrame, text="Key:", font=4)
 keyLabel.pack()
 
-keyEntry = tk.Entry(optionsFrame, text = "EncryptionKey")
+keyEntry = tk.Entry(optionsFrame, text="EncryptionKey")
 keyEntry.pack()
 
 # Midlle
 
 
 # Encrypt Button
-EnryptCeasarButton = tk.Button(text = "Encrypt!", width = 15, font = 8, foreground = "white", bg = "red",
-                               command = lambda: encryptInputText(LeftBox, RightBox))
-EnryptCeasarButton.grid(column = 2, row = 2)
+EnryptCeasarButton = tk.Button(text="Encrypt!", width=15, font=8, foreground="white", bg="red",
+                               command=lambda: encryptInputText(LeftBox, RightBox))
+EnryptCeasarButton.grid(column=2, row=2)
 
 
 def decryptInputText(LeftBox, RightBox):
@@ -131,32 +129,32 @@ def decryptInputText(LeftBox, RightBox):
     RightBox.insert("1.0", chiffre_text)
 
 
-DecrypTionButton = tk.Button(text = "Decrypt!!", width = 15, font = 8, foreground = "white", bg = "green",
-                             command = lambda: decryptInputText(LeftBox, RightBox))
-DecrypTionButton.grid(column = 2, row = 3)
+DecrypTionButton = tk.Button(text="Decrypt!!", width=15, font=8, foreground="white", bg="green",
+                             command=lambda: decryptInputText(LeftBox, RightBox))
+DecrypTionButton.grid(column=2, row=3)
 
 # Choose encryption
 
 
 newFrame = tk.Frame(window)
-newFrame.grid(column = 2, row = 4)
+newFrame.grid(column=2, row=4)
 
 v = tk.StringVar(newFrame, 0)
 
-r1 = tk.Radiobutton(newFrame, text = "Caesar-Chiffre", value = 0, variable = v, font = 7)
+r1 = tk.Radiobutton(newFrame, text="Caesar-Chiffre", value=0, variable=v, font=7)
 r1.pack()
 
-r2 = tk.Radiobutton(newFrame, text = "Vigenere-Chiffre", value = 1, variable = v, font = 7)
+r2 = tk.Radiobutton(newFrame, text="Vigenere-Chiffre", value=1, variable=v, font=7)
 r2.pack()
 
 # Right side
 
-LabelEntry = tk.Label(text = "Output", width = 25, height = 1, font = 6)
-LabelEntry.grid(column = 4, row = 1)
+LabelEntry = tk.Label(text="Output", width=25, height=1, font=6)
+LabelEntry.grid(column=4, row=1)
 
-RightBox = tk.Text(height = 3, width = 20)
-RightBox.grid(column = 4, row = 2)
+RightBox = tk.Text(height=3, width=20)
+RightBox.grid(column=4, row=2)
 
-Button = tk.Button(text = "Save to file ", command = lambda: saveToFile(RightBox))
-Button.grid(column = 4, row = 3)
+Button = tk.Button(text="Save to file ", command=lambda: saveToFile(RightBox))
+Button.grid(column=4, row=3)
 window.mainloop()

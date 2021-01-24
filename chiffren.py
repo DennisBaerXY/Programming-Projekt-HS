@@ -8,7 +8,7 @@ chiffren.py
 # Die funktion nimmt einen Text in der variable text und einen shift amount in amount. Amounts default wert ist 10
 def ceasarChiffre(text, amount=10):
     # String wird in liste umgewandelt da das zuweisen an eine stelle im string bsp text[0] nicht funktioniert
-    text = text.upper()
+
     charArray = list(text)
 
     # Jeder buchstabe wird geshifted
@@ -25,68 +25,96 @@ def ceasarChiffre(text, amount=10):
     return text
 
 
+def rangeIt(number, amount, bottom=65, top=90):
+    number += amount
+    rangeOfSet = abs(top - bottom) + 1
+    while number > top:
+        number = number - rangeOfSet
+    while number < bottom:
+        number = number + rangeOfSet
+
+    c = chr(number)
+    return c
+
+
 # Einzelner Buchstabe ( c ) wird um amount geändert.
 # Bsp c = 'a' und amount = 4        -> b -> c -> d -> e
 # dann ist return 'e'
-def shiftChar(c, amount=10, asciiLast=90):
+def shiftChar(c, amount=10):
     number = ord(c)
+    # GroßBuchstaben
     if (number >= 65 and number <= 90):
-        number += amount
-
-        while number > asciiLast:
-            number = number - 26
-        while number < 65:
-            number = number + 26
-
-        c = chr(number)
-
-        return c
+        return rangeIt(number, amount, 65, 90)
+    # KleinBuchstaben
+    elif (number >= 97 and number <= 122):
+        return rangeIt(number, amount, 97, 122)
 
     # Returned zeichen wenn es kein Groß buchstabe ist
     return c
 
 
-def vigenereChiffre(text="Default", key="Default"):
-    multiCeasarChiffre = []
+def generateMultiCaesarField(bottom=65, top=91):
+    charSets = list(map(chr, range(bottom, top)))
+    caesarField = []
 
-    alphabet = list(map(chr, range(65, 91)))
-
+    length = abs(top - bottom)
     # Generierung des um eine Zeile immer geschifftete Feld
-    for i in range(26):
+    for i in range(length):
         row = []
-        for j in range(26):
-            row.append(ceasarChiffre(alphabet[j], i))
-        multiCeasarChiffre.append(row)
+        for j in range(length):
+            row.append(ceasarChiffre(charSets[j], i))
+        caesarField.append(row)
+    return caesarField
 
-    text = text.upper()
-    key = key.upper()
+
+def makeKeyCorrectLength(text, key):
     # Ursprungs key um das es erweitert werden kann
     keydata = key
 
     # Solange der text noch länger als der Key ist wird an key, key hinzugefügt ..bsp key: Abc Text: Dennis,  Key danach -> AbcAbc
     while len(text) > len(key):
         key = key + keydata
+    return key
 
-    keyList = list(key)
-    textList = list(text)
+
+def IndexViginere(key, i):
+    if key[i].isupper():
+        indexKey = ord(key[i]) - 65
+    elif key[i].islower():
+        indexKey = ord(key[i]) - 97
+    else:
+        indexKey = None
+    return indexKey
+
+
+
+
+def vigenereChiffre(text="Default", key="Default"):
+    # Generierung des um eine Zeile immer geschifftete Feld
+    upperChiffre = generateMultiCaesarField(65, 91)
+    lowerChiff = generateMultiCaesarField(97, 123)
+
+    key = makeKeyCorrectLength(text, key)
+
     encryptList = []
 
     # Encryotion Process mit der vigenere "Tabelle"
     for i in range(len(text)):
         # -65 um die Großbuchstaben in indexe umzuwanden bps A = 65  ->  A - 65 = 0
         # ord um die Ascii werte zu bekommen in Decimal
+        indexKey = IndexViginere(key, i)
+        indexText = IndexViginere(text,i)
 
-        indexText = ord(textList[i]) - 65
-        indexKey = ord(keyList[i]) - 65
-
-        if (indexText <= 25 and indexText >= 0):
-
-            encryptList.append(multiCeasarChiffre[indexText][indexKey])
+        if text[i].isupper():
+            encryptList.append(upperChiffre[indexText][indexKey])
+        elif text[i].islower():
+            encryptList.append(lowerChiff[indexText][indexKey])
         else:
             encryptList.append(text[i])
 
-        # Zusammen fügen der Liste als Text
-        encryptText = "".join(encryptList)
+
+    # Zusammen fügen der Liste als Text
+    encryptText = "".join(encryptList)
     return encryptText
 
 
@@ -142,7 +170,7 @@ def decryptCeasar(text):
             maxPoints = points
 
     # Ergebnis gibt die shifts die man zurück gehen müsste um den Original text zu bekommen.
-    result = 26 - result % 26
+    shifts = 26 - result % 26
 
     # Returned wird der Original text der druch das chiffrieren in die andere richtung generiert wird und wie viele shifts es gewesen sind
-    return ceasarChiffre(text, result * -1), result
+    return ceasarChiffre(text, shifts * -1), shifts

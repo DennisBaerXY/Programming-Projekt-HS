@@ -44,7 +44,7 @@ def createTextFile(filename="Decrypted.txt", location="./Decrypted/", content="T
                    overwrite=False):
     filename = checkIfFilenameTypeIsText(filename)
     print(filename)
-    if overwrite:
+    if not overwrite:
         if os.path.exists(location + filename):
             filenameSlice = filename.split(".")
 
@@ -66,4 +66,4 @@ def createDecryptFile(filename="ThisIsMyFile.txt", content=" ", overwrite=True):
 
 initFileModule()
 
-createDecryptFile("DennisIstMegacool", content = "Welt wie geht es dir denn heute?")
+
